@@ -12,6 +12,8 @@ COMMIT := $(shell git rev-parse --short HEAD)
 
 # Use linker flags to provide version/build settings to the target
 LDFLAGS :=\
+	-X '${GOMODULE}/internal/pkg/version.tag=$(TAG)'\
+	-X '${GOMODULE}/internal/pkg/version.commit=$(COMMIT)'\
 
 # Targets
 .DEFAULT_GOAL := help
@@ -27,7 +29,7 @@ build: $(CMDS) ## Build applications
 bin/$(GOOS)/streamer: CMD_TITLE := GoStreamer Server
 bin/$(GOOS)/%:
 	@echo "==> Building ${CMD_TITLE}"
-	@go build -ldflags "$(LDFLAGS)" -o $@ ./cmd/$(shell basename "$@")
+	@go build -ldflags "-X '${GOMODULE}/internal/pkg/version.title=$(CMD_TITLE)' $(LDFLAGS)" -o $@ ./cmd/$(shell basename "$@")
 
 .PHONY: clean
 clean: ## Clean the build directory

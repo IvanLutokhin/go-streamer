@@ -2,14 +2,30 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"github.com/IvanLutokhin/go-streamer/internal/app/streamer"
+	"github.com/IvanLutokhin/go-streamer/internal/pkg/version"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
+var versionPtr *bool
+
+func init() {
+	versionPtr = flag.Bool("version", false, "Display application version")
+}
+
 func main() {
+	flag.Parse()
+
+	if *versionPtr {
+		fmt.Println(version.String())
+
+		os.Exit(0)
+	}
+
 	app := streamer.New()
 
 	startCtx, startCancel := context.WithTimeout(context.Background(), app.StartTimeout())
