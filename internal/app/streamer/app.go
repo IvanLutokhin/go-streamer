@@ -1,6 +1,7 @@
 package streamer
 
 import (
+	"github.com/IvanLutokhin/go-streamer/internal/app/streamer/logger"
 	"go.uber.org/fx"
 	"time"
 )
@@ -15,6 +16,9 @@ func buildOpts(opts ...fx.Option) []fx.Option {
 			fx.NopLogger,
 			fx.StartTimeout(time.Minute),
 			fx.StopTimeout(time.Minute),
+		),
+		fx.Provide(
+			logger.New,
 		),
 	}
 

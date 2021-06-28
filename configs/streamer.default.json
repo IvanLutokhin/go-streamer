@@ -1,1 +1,23 @@
-{}
+{
+  "logger": {
+    "handlers": [
+      {
+        "enabled": true,
+        "code": "stream",
+        "options": {
+          "level": "debug",
+          "formatter": {
+            "code": "text",
+            "options": {
+              "template": "%datetime% %caller% %level% %message% %context%",
+              "skip_unknown_tag": true
+            }
+          },
+          "writer": {
+            "code": "stdout"
+          }
+        }
+      }
+    ]
+  }
+}
