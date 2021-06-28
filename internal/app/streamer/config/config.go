@@ -3,13 +3,18 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/IvanLutokhin/go-streamer/internal/pkg/log/logger"
 	"os"
 )
 
-type Config struct{}
+type Config struct {
+	Logger *logger.Config `json:"logger"`
+}
 
 func NewDefault() *Config {
-	return &Config{}
+	return &Config{
+		Logger: logger.NewDefaultConfig(),
+	}
 }
 
 func Load(filename string) (*Config, error) {
@@ -34,5 +39,9 @@ func Load(filename string) (*Config, error) {
 }
 
 func (config *Config) Validate() (err error) {
+	if err = config.Logger.Validate(); err != nil {
+		return
+	}
+
 	return
 }
