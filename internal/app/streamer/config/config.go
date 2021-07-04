@@ -3,7 +3,7 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/IvanLutokhin/go-streamer/internal/pkg/log/logger"
+	"github.com/IvanLutokhin/go-streamer/internal/app/streamer/config/logger"
 	"os"
 )
 
